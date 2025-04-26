@@ -1,144 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Valida Juri</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" ></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-    
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-    
-        canvas {
-            max-width: 700px;
-            margin: 0 auto;
-            display: block;
-        }
-    </style>
-  </head>
-  <body>
-    <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px;">
-        <div>
-            <h1>Área de atuação</h1>
-          <canvas id="myChart2"></canvas>
-        </div>
-        <div>
-            <h1>Tipo de pesquisa</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valida Juri</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .chart-box {
+      flex: 1 1 300px;
+      max-width: 400px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
 
-          <canvas id="myChart"></canvas>
-        </div>
-        <div>
-            <h1>Advogados com ciência da possibilidade</h1>
-
-          <canvas id="myChart3"></canvas>
-        </div>
-
-        <div>
-            <h1>Quantidade que monitoram</h1>
-
-          <canvas id="myChart4"></canvas>
-        </div>
+  <div class="chart-container">
+    <div class="chart-box">
+      <h1>Área de atuação</h1>
+      <canvas id="chartArea"></canvas>
     </div>
+    <div class="chart-box">
+      <h1>Tipo de pesquisa</h1>
+      <canvas id="chartTipo"></canvas>
+    </div>
+    <div class="chart-box">
+      <h1>Advogados com ciência da possibilidade</h1>
+      <canvas id="chartCiencia"></canvas>
+    </div>
+    <div class="chart-box">
+      <h1>Quantidade que monitoram</h1>
+      <canvas id="chartMonitoram"></canvas>
+    </div>
+  </div>
 
-    <script>
+  <script>
+    const labels = ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"];
+    const dataValues = [12, 19, 3, 5, 2, 3];
 
-const ctx = document.getElementById('myChart');
-const ctx2 = document.getElementById('myChart2');
-const ctx3 = document.getElementById('myChart3');
-const ctx4 = document.getElementById('myChart4');
-
+    function createChart(canvasId, type, label) {
+      const ctx = document.getElementById(canvasId);
       new Chart(ctx, {
-        type: "pie",
+        type: type,
         data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
+          labels: labels,
+          datasets: [{
+            label: label,
+            data: dataValues,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.6)",
+              "rgba(54, 162, 235, 0.6)",
+              "rgba(255, 206, 86, 0.6)",
+              "rgba(75, 192, 192, 0.6)",
+              "rgba(153, 102, 255, 0.6)",
+              "rgba(255, 159, 64, 0.6)"
+            ],
+            borderColor: "#fff",
+            borderWidth: 1,
+          }]
         },
         options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            }
+          }
+        }
       });
+    }
 
-      new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
+    createChart("chartArea", "bar", "Área de atuação");
+    createChart("chartTipo", "pie", "Tipo de pesquisa");
+    createChart("chartCiencia", "doughnut", "Consciência");
+    createChart("chartMonitoram", "polarArea", "Monitoramento");
+  </script>
 
-      new Chart(ctx3, {
-        type: "doughnut",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      new Chart(ctx4, {
-        type: "polarArea",
-        data: {
-          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-          datasets: [
-            {
-              label: "# of Votes",
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    </script>
-  </body>
+</body>
 </html>
