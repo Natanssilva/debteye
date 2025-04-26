@@ -29,12 +29,23 @@
     <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 20px;">
         <div>
             <h1>Área de atuação</h1>
-          <canvas id="myChart"></canvas>
+          <canvas id="myChart2"></canvas>
         </div>
         <div>
             <h1>Tipo de pesquisa</h1>
 
-          <canvas id="myChart2"></canvas>
+          <canvas id="myChart"></canvas>
+        </div>
+        <div>
+            <h1>Advogados com ciência da possibilidade</h1>
+
+          <canvas id="myChart3"></canvas>
+        </div>
+
+        <div>
+            <h1>Quantidade que monitoram</h1>
+
+          <canvas id="myChart4"></canvas>
         </div>
     </div>
 
@@ -42,6 +53,8 @@
 
 const ctx = document.getElementById('myChart');
 const ctx2 = document.getElementById('myChart2');
+const ctx3 = document.getElementById('myChart3');
+const ctx4 = document.getElementById('myChart4');
 
       new Chart(ctx, {
         type: "pie",
@@ -66,6 +79,48 @@ const ctx2 = document.getElementById('myChart2');
 
       new Chart(ctx2, {
         type: "bar",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      new Chart(ctx3, {
+        type: "doughnut",
+        data: {
+          labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+          datasets: [
+            {
+              label: "# of Votes",
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      new Chart(ctx4, {
+        type: "polarArea",
         data: {
           labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
           datasets: [
