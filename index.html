@@ -68,7 +68,9 @@
     </div>
 
     <script>
-      
+      function isMobileByScreen() {
+        return window.innerWidth <= 768; // 768px é um valor comum para considerar "mobile"
+      }
 
       function createChart(canvasId, type, label, labelValues, dataValues) {
         const ctx = document.getElementById(canvasId);
@@ -97,6 +99,8 @@
             ],
           },
           options: {
+            indexAxis: isMobileByScreen() ? 'y' : 'x',
+
             responsive: true,
             plugins: {
               legend: {
@@ -138,7 +142,7 @@
           "Ambiental",
           "Empresarial",
           "Internacional",
-          "Maritimo"
+          "Maritimo",
         ],
         [15, 5, 7, 2, 2, 4, 5, 1, 1, 4, 1, 1]
       );
